@@ -1,5 +1,6 @@
 import numpy as np
 import sys 
+import math
 
 def selectionSort(entrada, tam):
 
@@ -13,6 +14,9 @@ def selectionSort(entrada, tam):
             aux = entrada[i]
             entrada[i] = entrada[menor]
             entrada[menor] = aux
+
+        porcento = (i/len(entrada)) * 100
+        print("\033[K", str(math.trunc(porcento)) + "%", end="\r")
 
     return entrada
 
@@ -33,11 +37,12 @@ def escreveResultado(saida):
 
 if __name__ == '__main__':
 
+    print("Lendo arquivo...")
     entrada = lerArquivo()
-    #print("Entrada:")
-    #print(entrada)
+    print("Arquivo Lido!!")
+    print("\nProcessando...")
     saida = selectionSort(entrada, len(entrada))
-    #print("Saída:")
-    #print(saida)
+    print("\nProcessado!!!")
+    print("Escrevendo Arquivo...")
     escreveResultado(saida)
     print("Concluído!")

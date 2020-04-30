@@ -1,5 +1,6 @@
 import numpy as np
 import sys 
+import math
 
 def insertionSort(vetor):
     
@@ -11,7 +12,9 @@ def insertionSort(vetor):
             j = j - 1
         
         vetor[j+1] = chave
-    
+
+        porcento = (i/len(vetor)) * 100
+        print("\033[K", str(math.trunc(porcento)) + "%", end="\r")
     return vetor
 
 def lerArquivo():
@@ -31,7 +34,12 @@ def escreveResultado(saida):
 
 if __name__ == '__main__':
     
+    print("Lendo arquivo...")
     entrada = lerArquivo()
+    print("Arquivo Lido!!")
+    print("\nProcessando...")
     saida = insertionSort(entrada)
+    print("\nProcessado!!!")
+    print("Escrevendo Arquivo...")
     escreveResultado(saida)
     print("Concluído!")

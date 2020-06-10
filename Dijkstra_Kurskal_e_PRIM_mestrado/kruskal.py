@@ -68,13 +68,13 @@ def lerArquivo():
     matrizAdjacencia = []
     criarMatrizQuadrada(qtdeVertices, matrizAdjacencia)
 
-    for i in range(1, qtdeVertices):
+    for i in range(qtdeVertices-1):
         linha = f.readline()
         elementos = linha.rsplit()
         aux = 0
-        for j in range(i, qtdeVertices):
-            matrizAdjacencia[i-1][j] = int(elementos[aux])
-            matrizAdjacencia[j][i-1] = int(elementos[aux])
+        for j in range(i+1, qtdeVertices):
+            matrizAdjacencia[i][j] = int(elementos[aux])
+            matrizAdjacencia[j][i] = int(elementos[aux])
             aux += 1
             
     return matrizAdjacencia,qtdeVertices

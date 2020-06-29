@@ -25,7 +25,9 @@ def mochila(capacidadeMochila,qtdeProdutos,custo,peso):
                 else:
                     matriz[j][i][0] = matriz[j][i+1][0]
                     matriz[j][i][1] = 0
-
+    
+    print(matriz)
+    print("")
     print("Valor: ",matriz[capacidadeMochila][0][0])
 
     j,S,res = capacidadeMochila,[],capacidadeMochila

@@ -2,8 +2,26 @@ import numpy as np
 import sys 
 import math
 
+def inicializaMatrizQuadrada(tamanho, matriz):
+    for i in range(tamanho):
+        matriz.append([])
+        for j in range(tamanho):
+            matriz[i].append(math.inf)
+
+def printMatriz(matriz,tamanho):
+    for i in range(tamanho):
+        print(matriz[i])
+
+def custoTotal(matriz,solucao):
+    custo = 0
+    for i in range(len(solucao)-1): custo += matriz[solucao[i]][solucao[i+1]]
+    return custo
+
+
+###################################################################
+
 def insercaoMaisProximo(matriz,tamanho):
-    cidadesVisitadas,cidadeAtual,menorCusto,custoTotal = [],0,math.inf,0
+    cidadesVisitadas,cidadeAtual,menorCusto = [],0,math.inf
      
     cidadesVisitadas.append(0)
 
@@ -13,20 +31,16 @@ def insercaoMaisProximo(matriz,tamanho):
                 menorCusto = matriz[cidadeAtual][i]
                 proximaCidade = i
         cidadeAtual = proximaCidade
-        custoTotal += menorCusto
         cidadesVisitadas.append(cidadeAtual)
         menorCusto = math.inf
-    custoTotal += matriz[cidadesVisitadas[len(cidadesVisitadas)-1]][0]
+    
     cidadesVisitadas.append(0)
-    
-    
+        
     print("Cidades Visitadas:",cidadesVisitadas)
-    print("Custo Total:",custoTotal)
+    print("Custo Total:",custoTotal(matriz,cidadesVisitadas))
 
 def insercaoMaisAfastada(matriz,tamanho):
-    
-    cidadesVisitadas,cidadeAtual,maiorCusto,custoTotal = [],0,0,0
-     
+    cidadesVisitadas,cidadeAtual,maiorCusto = [],0,0
     cidadesVisitadas.append(0)
 
     while(len(cidadesVisitadas) < tamanho):
@@ -36,17 +50,13 @@ def insercaoMaisAfastada(matriz,tamanho):
                 proximaCidade = i
 
         cidadeAtual = proximaCidade
-        custoTotal += maiorCusto
         cidadesVisitadas.append(cidadeAtual)
         maiorCusto = 0
     
-    custoTotal += matriz[cidadesVisitadas[len(cidadesVisitadas)-1]][0]
     cidadesVisitadas.append(0)
     
-    
     print("Cidades Visitadas:",cidadesVisitadas)
-    print("Custo Total:",custoTotal)
-
+    print("Custo Total:",custoTotal(matriz,cidadesVisitadas))
 
 def insercaoMaisBarata(matriz,tamanho):
     cidadesVisitadas,cidadesNaoVisitadas, menorValor = [],[],math.inf
@@ -71,58 +81,29 @@ def insercaoMaisBarata(matriz,tamanho):
             menorValor = matriz[i][cidadesVisitadas[0]]+matriz[cidadesVisitadas[1]][i]
     
     cidadesVisitadas.append(cidadeEscolhida)
+    cidadesVisitadas.append(cidadesVisitadas[0])
     cidadesNaoVisitadas.remove(cidadeEscolhida)
     menorValor = math.inf
-    print(cidadesVisitadas)
-    
+ 
     while(len(cidadesNaoVisitadas) > 0):
-        for a in range(len(cidadesVisitadas)):
+        for a in range(len(cidadesVisitadas)-1):
             for k in range(len(cidadesNaoVisitadas)):
-                
-                if(a < len(cidadesVisitadas)-1):
-                    if((matriz[cidadesVisitadas[a]][cidadesNaoVisitadas[k]] + matriz[cidadesNaoVisitadas[k]][cidadesVisitadas[a+1]] - matriz[cidadesVisitadas[a]][cidadesVisitadas[a+1]]) < menorValor and ((cidadesNaoVisitadas[k] in cidadesVisitadas) == False) ):
-                        print("i",cidadesVisitadas[a],"j",cidadesVisitadas[a+1],"k",cidadesNaoVisitadas[k])
-                        cidadeEscolhida = cidadesNaoVisitadas[k]
-                        menorValor = (matriz[cidadesVisitadas[a]][cidadesNaoVisitadas[k]] + matriz[cidadesNaoVisitadas[k]][cidadesVisitadas[a+1]] - matriz[cidadesVisitadas[a]][cidadesVisitadas[a+1]])
-                        posicao = a+1
-                        
-                else:   
-                         
-                    if((matriz[cidadesVisitadas[a]][cidadesNaoVisitadas[k]] + matriz[cidadesNaoVisitadas[k]][cidadesVisitadas[0]] - matriz[cidadesVisitadas[a]][cidadesVisitadas[0]]) < menorValor and ((cidadesNaoVisitadas[k] in cidadesVisitadas) == False) ):
-                        cidadeEscolhida = cidadesNaoVisitadas[k]
-                        menorValor = (matriz[cidadesVisitadas[a]][cidadesNaoVisitadas[k]] + matriz[cidadesNaoVisitadas[k]][cidadesVisitadas[0]] - matriz[cidadesVisitadas[a]][cidadesVisitadas[0]])
-                        posicao = len(cidadesVisitadas) 
-        
-        print(menorValor) 
-        if(posicao != len(cidadesVisitadas)):
-            cidadesVisitadas.insert(posicao,cidadeEscolhida)
-        else:
-            cidadesVisitadas.append(cidadeEscolhida)
+                if((matriz[cidadesVisitadas[a]][cidadesNaoVisitadas[k]] + matriz[cidadesNaoVisitadas[k]][cidadesVisitadas[a+1]] - matriz[cidadesVisitadas[a]][cidadesVisitadas[a+1]]) < menorValor):
+                    cidadeEscolhida = cidadesNaoVisitadas[k]
+                    menorValor = (matriz[cidadesVisitadas[a]][cidadesNaoVisitadas[k]] + matriz[cidadesNaoVisitadas[k]][cidadesVisitadas[a+1]] - matriz[cidadesVisitadas[a]][cidadesVisitadas[a+1]])
+                    posicao = a+1
+                    
+        cidadesVisitadas.insert(posicao,cidadeEscolhida)
         cidadesNaoVisitadas.remove(cidadeEscolhida)
         menorValor = math.inf
-           
-    cidadesVisitadas.append(cidadesVisitadas[0])
-    custoTotal = 0
-
-    for i in range(len(cidadesVisitadas)-1): custoTotal += matriz[cidadesVisitadas[i]][cidadesVisitadas[i+1]]
-
+ 
     print("Cidades Visitadas:",cidadesVisitadas)
-    print("Custo Total:",custoTotal)
-
+    print("Custo Total:",custoTotal(matriz,cidadesVisitadas))
     
 
 
-#############################################
+###################################################################
 
-def inicializaMatrizQuadrada(tamanho, matriz):
-    for i in range(tamanho):
-        matriz.append([])
-        for j in range(tamanho):
-            matriz[i].append(math.inf)
-
-def printMatriz(matriz,tamanho):
-    for i in range(tamanho):
-        print(matriz[i])
 
 def lerArquivo():
     
@@ -144,12 +125,12 @@ def lerArquivo():
             
     return matrizAdjacencia,qtdeVertices
 
-
+###################################################################
 
 if __name__ == '__main__':
 
     matriz,tamanho = lerArquivo()
-    printMatriz(matriz,tamanho)
+    #printMatriz(matriz,tamanho)
     insercaoMaisProximo(matriz,tamanho)
     insercaoMaisAfastada(matriz,tamanho)
     insercaoMaisBarata(matriz,tamanho)

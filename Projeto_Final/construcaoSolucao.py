@@ -17,9 +17,9 @@ def insercaoMaisProximo(matriz,tamanho):
     
     cidadesVisitadas.append(0)
         
-    print("Cidades Visitadas:",cidadesVisitadas)
-    print("Custo Total:",custoTotal(matriz,cidadesVisitadas))
-
+    #print("Cidades Visitadas:",cidadesVisitadas)
+    #print("Custo Total:",custoTotal(matriz,cidadesVisitadas))
+    return cidadesVisitadas,custoTotal(matriz,cidadesVisitadas)
 
 def insercaoMaisAfastada(matriz,tamanho):
     cidadesVisitadas,cidadeAtual,maiorCusto = [],0,0
@@ -37,8 +37,9 @@ def insercaoMaisAfastada(matriz,tamanho):
     
     cidadesVisitadas.append(0)
     
-    print("Cidades Visitadas:",cidadesVisitadas)
-    print("Custo Total:",custoTotal(matriz,cidadesVisitadas))
+    #print("Cidades Visitadas:",cidadesVisitadas)
+    #print("Custo Total:",custoTotal(matriz,cidadesVisitadas))
+    return cidadesVisitadas,custoTotal(matriz,cidadesVisitadas)
 
 
 def insercaoMaisBarata(matriz,tamanho):
@@ -80,6 +81,7 @@ def insercaoMaisBarata(matriz,tamanho):
         cidadesNaoVisitadas.remove(cidadeEscolhida)
         menorValor = math.inf
  
-    print("Cidades Visitadas:",cidadesVisitadas)
-    print("Custo Total:",custoTotal(matriz,cidadesVisitadas))
+    #print("Cidades Visitadas:",cidadesVisitadas)
+    #print("Custo Total:",custoTotal(matriz,cidadesVisitadas))
+    return cidadesVisitadas,custoTotal(matriz,cidadesVisitadas)
     

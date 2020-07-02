@@ -27,3 +27,26 @@ def lerArquivo():
             aux += 1
             
     return matrizAdjacencia,qtdeVertices
+
+def lerArquivo2():
+
+    filename = 'instancias/' + sys.argv[1]
+    f = open(filename, 'r')
+    qtdeVertices = int(f.readline())
+    print(qtdeVertices)
+    #qtdeArestas = 0
+    matrizAdjacencia = []
+    inicializaMatrizQuadrada(qtdeVertices, matrizAdjacencia)
+
+    for i in range(qtdeVertices):
+        linha = f.readline()
+        elementos = linha.rsplit()
+        aux = 0
+        for j in range(qtdeVertices):
+            matrizAdjacencia[i][j] = int(elementos[aux])
+            #matrizAdjacencia[j][i] = int(elementos[aux])
+            if(matrizAdjacencia[i][j] == 0 ):
+                matrizAdjacencia[i][j] = math.inf  
+            aux += 1
+            
+    return matrizAdjacencia,qtdeVertices

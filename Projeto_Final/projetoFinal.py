@@ -3,12 +3,15 @@ import math
 from lerArquivo import lerArquivo,lerArquivo2
 from funcoes import printMatriz,custoTotal,melhorConstrucao
 from construcaoSolucao import insercaoMaisProximo,insercaoMaisAfastada,insercaoMaisBarata
-from movimentoVizinhanca import twoOpt
+from movimentoVizinhanca import twoOpt,reinsertion 
+from vnd import vnd
 
 if __name__ == '__main__':
-
-    matriz,tamanho = lerArquivo()
     
+    try:
+        matriz,tamanho = lerArquivo2()
+    except IndexError:
+        matriz,tamanho = lerArquivo()
     
     #printMatriz(matriz,tamanho)
     listaMaisProximo, custoMaisProximo = insercaoMaisProximo(matriz,tamanho)
@@ -19,12 +22,17 @@ if __name__ == '__main__':
     print("Caminho Insercao Mais Afastada:  Custo = ",custoMaisAfastada)
     print("Caminho Insercao Mais Barata:  Custo = ",custoMaisBarata,"\n")
     
-    #melhorLista, melhorcusto = melhorConstrucao(matriz,listaMaisProximo,listaMaisAfastada,listaMaisBarata)
+    #reinsertion(matriz,listaMaisProximo)
+    #reinsertion(matriz,listaMaisAfastada)
+    #reinsertion(matriz,listaMaisBarata)
+    #print("")
+    #twoOpt(matriz,listaMaisProximo)
+    #twoOpt(matriz,listaMaisAfastada)
+    #twoOpt(matriz,listaMaisBarata)
+
+
+    vnd(matriz,custoMaisBarata,listaMaisBarata)
+
     
-    #print("Melhor Caminho das 3: Custo = ",melhorcusto,"\n")
-    
-    twoOpt(matriz,listaMaisProximo)
-    twoOpt(matriz,listaMaisAfastada)
-    twoOpt(matriz,listaMaisBarata)
 
     

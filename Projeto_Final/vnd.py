@@ -16,4 +16,6 @@ def vnd(matriz,custo,solucao):
                 menorCusto = custoAtual
             else:
                 parada = False
-            
+
+    #print("Melhor custo VND:",menorCusto)
+    return melhorSolucao,menorCusto      

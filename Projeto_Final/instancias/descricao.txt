@@ -4,6 +4,7 @@ Como interpretar os arquivos:
 -) A matriz de distâncias pode ser encontrada no campo EDGE_WEIGHT_SECTION
 
 Soluções ótimas
+
 -) bayg29 = 1610
 -) bays29 = 2020
 -) berlin52 = 7542

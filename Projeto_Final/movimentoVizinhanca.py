@@ -21,17 +21,24 @@ def aplicaSwapCusto(matriz,solucao,i,j,custo):
 def reinsertion(matriz,solucao):
     menorCusto,melhorSolucao = custoTotal(matriz,solucao),solucao[:]
   
-    for i in range(1,len(solucao)-2):
-        for j in range(i+1,len(solucao)-1):
-            
-            custoLocal,listaAux = aplicaSwapCusto(matriz,melhorSolucao,i,j,menorCusto)
+    for i in range(1,len(solucao)-1):
+        for j in range(1,len(solucao)-1):
+            if i != j :
+                listaAux = melhorSolucao[:]
+                #custoLocal,listaAux = aplicaSwapCusto(matriz,melhorSolucao,i,j,menorCusto)
+                
+                elemento = listaAux[i]
+                listaAux.remove(elemento)
+                listaAux.insert(j,elemento)
+                custoLocal = custoTotal(matriz,listaAux)
+                #print(listaAux)
+                if(custoLocal < menorCusto):
+                    menorCusto = custoLocal
+                    melhorSolucao = listaAux[:]    
 
-            if(custoLocal < menorCusto):
-                menorCusto = custoLocal
-                melhorSolucao = listaAux[:]    
-
-    print("Melhor Solucao reinsertion: Custo = ",menorCusto)
+    #print("Melhor Solucao reinsertion: Custo = ",menorCusto)
     return melhorSolucao,menorCusto
+
 
 
 def swapTwoOpt(matriz,solucao,i,j):
@@ -57,6 +64,5 @@ def twoOpt(matriz,solucao):
                 menorCusto = custoTotal(matriz,listaAux)
                 melhorSolucao = listaAux[:]    
 
-    print("Melhor Solucao twoOpt: Custo = ",menorCusto)
+    #print("Melhor Solucao twoOpt: Custo = ",menorCusto)
     return melhorSolucao,menorCusto
-

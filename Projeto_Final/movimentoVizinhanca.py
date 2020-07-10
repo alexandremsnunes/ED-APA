@@ -1,4 +1,4 @@
-from funcoes import copiaLista, custoTotal
+from funcoes import *
 
 def aplicaSwapCusto(matriz,solucao,i,j,custo):
     custoInicial,solucaoaux = custo,solucao[:]
@@ -40,7 +40,6 @@ def reinsertion(matriz,solucao):
     return melhorSolucao,menorCusto
 
 
-
 def swapTwoOpt(matriz,solucao,i,j):
     
     solucaoAux = solucao[:i]
@@ -49,8 +48,6 @@ def swapTwoOpt(matriz,solucao,i,j):
     solucaoAux += solucao[j+1:]
     
     return solucaoAux
-
-
 
 def twoOpt(matriz,solucao):
     menorCusto,melhorSolucao = custoTotal(matriz,solucao),solucao[:]

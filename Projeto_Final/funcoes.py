@@ -31,3 +31,13 @@ def melhorConstrucao(matriz,maisProximo, maisAfastado, maisBarato):
         melhorcontrucao = copiaLista(maisBarato)
     
     return melhorcontrucao, melhorCusto
+
+def exibeTempo(tempo):
+    tempo = (tempo / 60) / 60
+    horas = str(math.trunc(tempo))
+    tempo = (tempo - math.trunc(tempo)) * 60
+    minutos = str(math.trunc(tempo))
+    tempo = (tempo - math.trunc(tempo)) * 60
+    segundos = str(math.trunc(tempo))
+
+    return (horas + " h: "+ minutos+" m: " + segundos+" s")

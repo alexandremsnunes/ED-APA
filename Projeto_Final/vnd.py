@@ -1,4 +1,4 @@
-from movimentoVizinhanca import twoOpt,reinsertion
+from movimentoVizinhanca import *
 
 def vnd(matriz,custo,solucao):
     menorCusto,melhorSolucao,parada = custo, solucao[:],True

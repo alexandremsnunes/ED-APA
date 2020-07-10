@@ -1,7 +1,7 @@
 import math
 import random
-from funcoes import printMatriz,custoTotal
-from heapSort import heapSort, heapSortmin
+from funcoes import *
+from heapSort import *
 
 def insercaoMaisProximo(matriz,tamanho):
     cidadesVisitadas,cidadeAtual,menorCusto = [],0,math.inf
